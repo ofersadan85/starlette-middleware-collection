@@ -1,0 +1,32 @@
+[project]
+name = "starlette-middleware-collection"
+version = "0.1.0"
+description = "Collection of middleware for Starlette applications"
+readme = "README.md"
+authors = [{ name = "Ofer Sadan", email = "ofersadan85@gmail.com" }]
+requires-python = ">=3.14"
+dependencies = [
+    "starlette>=1.3.1",
+    "uuid>=1.30",
+]
+
+[dependency-groups]
+dev = [
+    "fastapi>=0.139.0",
+    "httpx2>=2.5.0",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+]
+
+[project.scripts]
+fastapi-middleware-collection = "fastapi_middleware_collection:main"
+
+[build-system]
+requires = ["uv_build>=0.11.23,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["I", "W", "E", "UP", "RUF"]
