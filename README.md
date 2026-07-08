@@ -1,8 +1,10 @@
 # starlette-middleware-collection
 
+[![starlette-middleware-collection on pypi](https://img.shields.io/pypi/v/starlette-middleware-collection)](https://pypi.org/project/starlette-middleware-collection/)
 [![CI and Publish](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml/badge.svg)](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml)
+![Code Size](https://img.shields.io/github/languages/code-size/ofersadan85/starlette-middleware-collection)
 
-A small collection of Starlette-compatible middleware, with FastAPI compatibility and examples.
+A small collection of Starlette compatible middleware, with FastAPI compatibility and examples.
 
 ## Included Middleware
 
@@ -11,10 +13,16 @@ A small collection of Starlette-compatible middleware, with FastAPI compatibilit
 
 ## Installation
 
-Install from source:
+Install from PyPI:
 
 ```bash
-pip install -e .
+pip install starlette-middleware-collection
+```
+
+Or with [uv](https://astral.sh/uv):
+
+```bash
+uv add starlette-middleware-collection
 ```
 
 ## SizeLimit
@@ -129,8 +137,21 @@ async def upload(request: Request):
     return {"request_id": str(request.state.id)}
 ```
 
-## Running Tests
+## Requirements
 
-```bash
-pytest
-```
+![starlette-middleware-collection](https://img.shields.io/pypi/pyversions/starlette-middleware-collection)
+
+Currently supports only Python 3.14 with latest version of [Starlette](https://pypi.org/project/starlette/). We plan on supporting older versions of Python and Starlette in the near future.
+
+## Contributing
+
+[![Open Issues](https://img.shields.io/github/issues-raw/ofersadan85/starlette-middleware-collection)](https://github.com/ofersadan85/starlette-middleware-collection/issues)
+[![Closed Issues](https://img.shields.io/github/issues-closed-raw/ofersadan85/starlette-middleware-collection)](https://github.com/ofersadan85/starlette-middleware-collection/issues)
+[![Open Pull Requests](https://img.shields.io/github/issues-pr-raw/ofersadan85/starlette-middleware-collection)](https://github.com/ofersadan85/starlette-middleware-collection/pulls)
+[![Closed Pull Requests](https://img.shields.io/github/issues-pr-closed-raw/ofersadan85/starlette-middleware-collection)](https://github.com/ofersadan85/starlette-middleware-collection/pulls)
+
+For bugs / feature requests please submit [issues](https://github.com/ofersadan85/starlette-middleware-collection/issues). If you would like to contribute to this project, you are welcome to [submit a pull request](https://github.com/ofersadan85/starlette-middleware-collection/pulls)
+
+## Warranty / Liability / Official support
+
+This project is being developed independently, we provide the package "as-is" without any implied warranty or liability, usage is your own responsibility
