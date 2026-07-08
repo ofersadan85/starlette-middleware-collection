@@ -1,5 +1,7 @@
 # starlette-middleware-collection
 
+[![CI and Publish](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml/badge.svg)](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml)
+
 A small collection of Starlette-compatible middleware, with FastAPI compatibility and examples.
 
 ## Included Middleware
