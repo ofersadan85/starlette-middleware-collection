@@ -20,6 +20,7 @@ uv tool run ruff check --fix  # lint with autofix
 uv tool run ruff format  # format
 uv tool run ty check  # type check
 uv build  # build sdist/wheel into dist/
+uv run mkdocs build --strict  # build docs into site/
 ```
 
 Pre-commit hooks (via [prek](https://prek.j178.dev/)) run `uv-lock`, `ruff-check --fix`, `ruff-format`, `ty check`, and `pytest --maxfail=1` on commit — see `.pre-commit-config.yaml`. CI (`.github/workflows/ci-publish.yml`) runs ruff, ty, and pytest on every PR/push, and publishes to PyPI on `v*` tags after CI passes.
@@ -33,7 +34,7 @@ Each middleware lives in its own module under `src/starlette_middleware_collecti
 - Behavior is implemented in `async def dispatch(self, request, call_next)`.
 - Each module defines its own `ENV_VAR_NAME` constant (e.g. `MW_REQUEST_BODY_LIMIT`, `MW_UUID_VERSION`) — these are read at middleware init time, not at import time, so tests can set/unset `os.environ` per-test.
 
-When adding a new middleware, follow this same shape (module-level `ENV_VAR_NAME`, constructor-arg-over-env-var precedence, dispatch-based logic) and export it from `__init__.py` and `__all__`. Shared logic is factored into helpers rather than duplicated.
+When adding a new middleware, follow this same shape (module-level `ENV_VAR_NAME`, constructor-arg-over-env-var precedence, dispatch-based logic) and export it from `__init__.py` and `__all__`. Shared logic is factored into helpers rather than duplicated. Documentation is generated from module docstrings and every module should also have a markdown file in `docs/middleware/` with usage examples and API reference.
 
 ### Tests
 
