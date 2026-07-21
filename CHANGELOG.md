@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Bugfix: Exceptions raised in a user's custom `formatter` do not break the request flow
+- Tests: Added a test to verify that the `RequestLogging` works with a custom `logging.FileHandler`
 
 ### Removed
 

@@ -1,5 +1,6 @@
 import logging
 import os
+import tempfile
 
 from fastapi import FastAPI, Request
 from fastapi.testclient import TestClient
@@ -117,3 +118,34 @@ def test_request_logging_handler_exception_does_not_break_request(caplog):
         response = client.get("/")
     assert response.status_code == 200
     assert any("failed to emit" in r.message for r in caplog.records)
+
+
+def test_request_logging_file_handler():
+    with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".log") as f:
+        log_file = f.name
+
+    try:
+        logger = logging.getLogger(DEFAULT_LOGGER_NAME)
+        handler = logging.FileHandler(log_file)
+        formatter = logging.Formatter("%(message)s")
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+
+        try:
+            client = TestClient(setup_app())
+            response = client.get("/")
+            assert response.status_code == 200
+
+            with open(log_file) as f:
+                content = f.read()
+            assert len(content) > 0, "Log file should contain data"
+            assert "GET" in content
+            assert "/" in content
+            assert "200" in content
+        finally:
+            logger.removeHandler(handler)
+            handler.close()
+    finally:
+        if os.path.exists(log_file):
+            os.unlink(log_file)
