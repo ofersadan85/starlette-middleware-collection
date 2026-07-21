@@ -11,6 +11,15 @@ DEFAULT_HEADER = "X-Process-Time"
 
 
 class ResponseTime(BaseHTTPMiddleware):
+    """Adds a response header with the request duration, in seconds.
+
+    Args:
+        app: The ASGI application to wrap.
+        dispatch: Optional custom dispatch function, forwarded to `BaseHTTPMiddleware`.
+        header_name: Name of the response header to set. Falls back to the
+            `MW_TIMING_HEADER` environment variable, then to `"X-Process-Time"`.
+    """
+
     def __init__(self, app: ASGIApp, dispatch: DispatchFunction | None = None, header_name: str | None = None) -> None:
         self.header_name = header_name or os.getenv(ENV_VAR_NAME, DEFAULT_HEADER)
         super().__init__(app, dispatch)

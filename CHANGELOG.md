@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Per-middleware documentation pages on the docs site, generated from module doc strings.
+
 ### Changed
 
 ### Removed

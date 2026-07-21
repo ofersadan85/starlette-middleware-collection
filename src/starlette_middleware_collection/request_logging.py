@@ -19,6 +19,29 @@ Formatter = Callable[[Request, Response, float], Any]
 
 
 class RequestLogging(BaseHTTPMiddleware):
+    """Logs one record per request.
+
+    By default logs a structured dict to a standard-library logger; pass a
+    `formatter` to customize the record and/or a `handler` (sync or async)
+    to route it anywhere instead. Pairs with `RequestUUID`: when
+    `request.state.id` is set, it is included as `request_id`.
+
+    Args:
+        app: The ASGI application to wrap.
+        dispatch: Optional custom dispatch function, forwarded to `BaseHTTPMiddleware`.
+        logger: Logger to log to when no `handler` is given. Defaults to
+            `logging.getLogger("starlette_middleware_collection.request")`.
+        level: Log level to use when no `handler` is given. Falls back to
+            the `MW_REQUEST_LOG_LEVEL` environment variable, then to
+            `logging.INFO`.
+        handler: Optional sync or async callable that receives each record
+            instead of the logger, e.g. to write to a file, database, or
+            queue. A failing handler is caught and logged; it never breaks
+            the request.
+        formatter: Optional callable `(request, response, elapsed) -> Any`
+            that builds the record. Defaults to `default_record`.
+    """
+
     def __init__(
         self,
         app: ASGIApp,
@@ -36,6 +59,17 @@ class RequestLogging(BaseHTTPMiddleware):
         super().__init__(app, dispatch)
 
     def default_record(self, request: Request, response: Response, elapsed: float) -> dict:
+        """Build the default log record for a request/response pair.
+
+        Args:
+            request: The incoming request.
+            response: The outgoing response.
+            elapsed: Request duration, in seconds.
+
+        Returns:
+            A dict with `request_id`, `method`, `path`, `status_code`,
+            `duration_ms`, and `client`.
+        """
         return {
             "request_id": str(rid) if (rid := getattr(request.state, "id", None)) else None,
             "method": request.method,

@@ -34,6 +34,12 @@ plugins:
 
 nav:
   - Home: index.md
+  - Middleware:
+      - SizeLimit: middleware/size_limit.md
+      - RequestUUID: middleware/request_uuid.md
+      - ResponseUUID: middleware/response_uuid.md
+      - ResponseTime: middleware/response_timing.md
+      - RequestLogging: middleware/request_logging.md
   - Changelog: CHANGELOG.md
 
 validation:

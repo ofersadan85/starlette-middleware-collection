@@ -37,8 +37,10 @@ build-backend = "uv_build"
 
 [project.urls]
 Homepage = "https://github.com/ofersadan85/starlette-middleware-collection"
+Documentation = "https://ofersadan85.github.io/starlette-middleware-collection/"
 Repository = "https://github.com/ofersadan85/starlette-middleware-collection"
 Issues = "https://github.com/ofersadan85/starlette-middleware-collection/issues"
+Changelog = "https://github.com/ofersadan85/starlette-middleware-collection/CHANGELOG"
 
 [tool.ruff]
 line-length = 120

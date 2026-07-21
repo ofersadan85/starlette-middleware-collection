@@ -12,6 +12,22 @@ DEFAULT_HEADER = "X-Api-Request-Id"
 
 
 class ResponseUUID(BaseHTTPMiddleware):
+    """Sets a request-id response header on every response.
+
+    Propagates `request.state.id` when `RequestUUID` is also installed;
+    otherwise generates a fresh id so the header is always present.
+
+    Args:
+        app: The ASGI application to wrap.
+        dispatch: Optional custom dispatch function, forwarded to `BaseHTTPMiddleware`.
+        header_name: Name of the response header to set. Falls back to the
+            `MW_RESPONSE_ID_HEADER` environment variable, then to
+            `"X-Api-Request-Id"`.
+        uuid_version: `4` or `7`, used only when generating a fresh id.
+            Falls back to the `MW_UUID_VERSION` environment variable, then
+            to `7`.
+    """
+
     def __init__(
         self,
         app: ASGIApp,
