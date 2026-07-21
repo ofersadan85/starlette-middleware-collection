@@ -10,3 +10,5 @@ wheels/
 .venv
 
 pytest.log
+.coverage
+coverage.xml

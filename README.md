@@ -3,6 +3,7 @@
 [![starlette-middleware-collection on pypi](https://img.shields.io/pypi/v/starlette-middleware-collection)](https://pypi.org/project/starlette-middleware-collection/)
 [![CI and Publish](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml/badge.svg)](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml)
 ![Code Size](https://img.shields.io/github/languages/code-size/ofersadan85/starlette-middleware-collection)
+[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fn8n.zero-ml.com%2Fwebhook%2F92771a42-9389-4c1d-865b-930acd27a5e5%3Fid%3D1)](https://github.com/ofersadan85/starlette-middleware-collection/actions/workflows/ci-publish.yml)
 
 A small collection of Starlette compatible middleware, with FastAPI compatibility and examples.
 

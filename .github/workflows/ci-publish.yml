@@ -38,6 +38,51 @@ jobs:
       - name: Run tests
         run: uv run pytest -q
 
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install project dependencies
+        run: uv sync --all-groups
+
+      - name: Run tests with coverage
+        run: uv run pytest --cov=starlette_middleware_collection --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=html:htmlcov
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: |
+            coverage.xml
+            htmlcov/
+
+      - name: Compute coverage percentage
+        id: coverage
+        run: |
+          PCT=$(uv run python -c "import xml.etree.ElementTree as ET; print(round(float(ET.parse('coverage.xml').getroot().attrib['line-rate']) * 100))")
+          if [ "$PCT" -ge 90 ]; then COLOR=brightgreen
+          elif [ "$PCT" -ge 75 ]; then COLOR=green
+          elif [ "$PCT" -ge 50 ]; then COLOR=yellow
+          else COLOR=red
+          fi
+          echo "percentage=$PCT" >> "$GITHUB_OUTPUT"
+          echo "color=$COLOR" >> "$GITHUB_OUTPUT"
+
+      - name: Send coverage badge data
+        if: vars.BADGES_ENDPOINT != ''
+        run: |
+          curl -sf -X POST "${{ vars.BADGES_ENDPOINT }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"label\":\"coverage\",\"message\":\"${{ steps.coverage.outputs.percentage }}%\",\"color\":\"${{ steps.coverage.outputs.color }}\"}"
+
   publish:
     name: Publish to PyPI
     runs-on: ubuntu-latest
