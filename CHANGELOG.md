@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD024 -->
+<!-- Use the following sections:
+- `Added` for new features.
+- `Changed` for changes in existing functionality.
+- `Deprecated` for soon-to-be removed features.
+- `Removed` for now removed features.
+- `Fixed` for any bug fixes.
+- `Security` in case of vulnerabilities.
+-->
 
 ## [Unreleased](https://github.com/ofersadan85/starlette-middleware-collection/tree/main)
 
@@ -12,12 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Per-middleware documentation pages on the docs site, generated from module doc strings.
 
-### Changed
+### Fixed
 
 - Bugfix: Exceptions raised in a user's custom `formatter` do not break the request flow
-- Tests: Added a test to verify that the `RequestLogging` works with a custom `logging.FileHandler`
 
-### Removed
+### Changed
+
+- Tests: Added a test to verify that the `RequestLogging` works with a custom `logging.FileHandler`
 
 ## [v0.2.0](https://github.com/ofersadan85/starlette-middleware-collection/tree/v0.2.0) - 2026-07-21
 
