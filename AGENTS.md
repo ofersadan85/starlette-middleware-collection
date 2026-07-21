@@ -33,7 +33,7 @@ Each middleware lives in its own module under `src/starlette_middleware_collecti
 - Behavior is implemented in `async def dispatch(self, request, call_next)`.
 - Each module defines its own `ENV_VAR_NAME` constant (e.g. `MW_REQUEST_BODY_LIMIT`, `MW_UUID_VERSION`) — these are read at middleware init time, not at import time, so tests can set/unset `os.environ` per-test.
 
-When adding a new middleware, follow this same shape (module-level `ENV_VAR_NAME`, constructor-arg-over-env-var precedence, dispatch-based logic) and export it from `__init__.py` and `__all__`.
+When adding a new middleware, follow this same shape (module-level `ENV_VAR_NAME`, constructor-arg-over-env-var precedence, dispatch-based logic) and export it from `__init__.py` and `__all__`. Shared logic is factored into helpers rather than duplicated.
 
 ### Tests
 

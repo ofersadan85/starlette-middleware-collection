@@ -1,6 +1,6 @@
 [project]
 name = "starlette-middleware-collection"
-version = "0.1.2"
+version = "0.2.0"
 description = "Collection of middleware for Starlette applications"
 readme = "README.md"
 license = "MIT"
