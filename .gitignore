@@ -9,6 +9,10 @@ wheels/
 # Virtual environments
 .venv
 
-pytest.log
+# Test artifacts
 .coverage
 coverage.xml
+pytest.log
+
+# Docs artifacts
+site/

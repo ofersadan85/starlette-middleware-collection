@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 <!-- markdownlint-disable MD024 -->
 
-## [Unreleased]
+## [Unreleased](https://github.com/ofersadan85/starlette-middleware-collection/tree/main)
 
 ### Added
 
@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-## [0.2.0] - 2026-07-21
+## [v0.2.0](https://github.com/ofersadan85/starlette-middleware-collection/tree/v0.2.0) - 2026-07-21
 
 ### Added
 
@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ResponseTime`: Middleware that measures the time taken to process each request and adds this information to the response headers.
 - `RequestLogging`: Middleware that logs incoming requests and outgoing responses, including details such as method, URL, status code, and processing time. Allows for configurable log formats and backends, enabling integration with various logging systems.
 
-## [0.1.2] - 2026-07-08
+## [v0.1.2](https://github.com/ofersadan85/starlette-middleware-collection/tree/v0.1.2) - 2026-07-08
 
 ### Added
 

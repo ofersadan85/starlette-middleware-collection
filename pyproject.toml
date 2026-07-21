@@ -23,6 +23,11 @@ dev = [
     "pytest-cov>=7.1.0",
 ]
 
+docs = [
+    "mkdocs-material",
+    "mkdocstrings[python]",
+]
+
 [project.scripts]
 fastapi-middleware-collection = "fastapi_middleware_collection:main"
 
