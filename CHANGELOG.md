@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Bugfix: Exceptions raised in a user's custom `formatter` do not break the request flow
+
 ### Removed
 
 ## [v0.2.0](https://github.com/ofersadan85/starlette-middleware-collection/tree/v0.2.0) - 2026-07-21

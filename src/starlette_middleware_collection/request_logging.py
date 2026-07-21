@@ -54,11 +54,14 @@ class RequestLogging(BaseHTTPMiddleware):
     ) -> None:
         self.logger = logger or logging.getLogger(DEFAULT_LOGGER_NAME)
         self.level = level if level is not None else int(os.getenv(ENV_VAR_NAME, logging.INFO))
-        self.handler = handler
-        self.formatter = formatter
+        self.handler = handler or self._default_handler
+        self.formatter = formatter or self._default_record
         super().__init__(app, dispatch)
 
-    def default_record(self, request: Request, response: Response, elapsed: float) -> dict:
+    def _default_handler(self, record: Any) -> None:
+        self.logger.log(self.level, record)
+
+    def _default_record(self, request: Request, response: Response, elapsed: float) -> dict:
         """Build the default log record for a request/response pair.
 
         Args:
@@ -83,18 +86,11 @@ class RequestLogging(BaseHTTPMiddleware):
         start = time.perf_counter()
         response = await call_next(request)
         elapsed = time.perf_counter() - start
-        record = (
-            self.formatter(request, response, elapsed)
-            if self.formatter
-            else self.default_record(request, response, elapsed)
-        )
         try:
-            if self.handler is not None:
-                result = self.handler(record)
-                if inspect.isawaitable(result):
-                    await result
-            else:
-                self.logger.log(self.level, record)
+            record = self.formatter(request, response, elapsed)
+            result = self.handler(record)
+            if inspect.isawaitable(result):
+                await result
         except Exception:  # logging must never break the request
             self.logger.exception("RequestLogging failed to emit record")
         return response

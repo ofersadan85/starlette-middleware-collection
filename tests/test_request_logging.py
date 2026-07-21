@@ -97,6 +97,17 @@ def test_request_logging_level_via_env_variable(caplog):
         del os.environ[ENV_VAR_NAME]
 
 
+def test_request_logging_formatter_exception_does_not_break_request(caplog):
+    def bad_formatter(request, response, elapsed):
+        raise RuntimeError("boom")
+
+    client = TestClient(setup_app(formatter=bad_formatter))
+    with caplog.at_level(logging.ERROR, logger=DEFAULT_LOGGER_NAME):
+        response = client.get("/")
+    assert response.status_code == 200
+    assert any("failed to emit" in r.message for r in caplog.records)
+
+
 def test_request_logging_handler_exception_does_not_break_request(caplog):
     def bad_handler(record: dict):
         raise RuntimeError("boom")
